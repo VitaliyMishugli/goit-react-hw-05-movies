@@ -33,7 +33,6 @@ const navAddDetails = [
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  // console.log(movieId);
 
   useEffect(() => {
     async function getMovie() {
@@ -43,7 +42,7 @@ const MovieDetails = () => {
       // console.log(popularMovies.total_results);
     }
     getMovie();
-  }, [])
+  }, [movieId])
 
   if (movie === null) {
     return null;
