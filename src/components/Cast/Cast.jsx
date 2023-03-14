@@ -33,7 +33,7 @@ const Cast = () => {
       <CastContainer>
         {movieCast.map(({ cast_id, character, name, profile_path }) => (
           <li key={cast_id}>
-            <img src={`${BASE_IMG_URL}${profile_path}`} alt="Sorry, no photo(" width={80}/>
+            <img src={`${BASE_IMG_URL}${profile_path}`} alt="" width={80}/>
             <p><b>Actor's name: </b>{name}</p>
             <p><b>Character: </b>{character}</p>
             <hr/>
