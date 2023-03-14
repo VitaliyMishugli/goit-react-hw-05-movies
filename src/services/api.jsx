@@ -1,5 +1,4 @@
 //  ec933baa094eb9a861a7c38baaae0d3c
-
 import axios from 'axios';
 
 const API_KEY = 'ec933baa094eb9a861a7c38baaae0d3c';
@@ -25,7 +24,6 @@ async function getMovieByKeyWord(id) {
     const response = await axios.get(
       `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
     );
-    // movie/${id}?api_key=${API_KEY}&language=en-US
     const data = await response.data;
     // console.log(data);
     return data;
@@ -34,5 +32,34 @@ async function getMovieByKeyWord(id) {
   }
 }
 
+// Отримання акторского складу
+async function getMovieCast(id) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+      // https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
+    );
+    const data = await response.data;
+    console.log(data.cast);
+    return data.cast;
+  } catch (error) {
+    console.error('Error happen' + error);
+  }
+}
 
-export { getPopularMovies, getMovieByKeyWord };
+// Отримання оглядів
+async function getMovieReviews(id) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`
+    );
+    const data = await response.data;
+    console.log(data.results);
+    return data.results;
+  } catch (error) {
+    console.error('Error happen' + error);
+  }
+}
+
+
+export { getPopularMovies, getMovieByKeyWord, getMovieCast, getMovieReviews };
