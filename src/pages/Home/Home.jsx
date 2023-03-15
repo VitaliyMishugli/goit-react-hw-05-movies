@@ -29,7 +29,7 @@ const Home = () => {
     async function getPopMovies() {
       const popularMovies = await getPopularMovies();
       setPopMovies(popularMovies.results);
-      console.log(popularMovies);
+      // console.log(popularMovies);
       // console.log(popularMovies.total_results);
     }
     getPopMovies();

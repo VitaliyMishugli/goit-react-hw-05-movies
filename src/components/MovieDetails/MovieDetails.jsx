@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink, Outlet } from "react-router-dom";
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getMovieByKeyWord} from 'services/api';
+import { getFullInfoById } from 'services/api';
 import { MovieInfoContainer, TextInfoContainer } from './MovieDetails.styled';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w200/';
@@ -35,13 +35,13 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);  
 
   useEffect(() => {
-    async function getMovie() {
-      const movieById = await getMovieByKeyWord(movieId);
+    async function getMovieInfo() {
+      const movieById = await getFullInfoById(movieId);
       setMovie(movieById);
       // console.log(movieById);
       // console.log(popularMovies.total_results);
     }
-    getMovie();
+    getMovieInfo();
   }, [movieId])
 
   if (movie === null) {
@@ -59,7 +59,6 @@ const MovieDetails = () => {
 
         <TextInfoContainer>
           <h1>{`${original_title} (${year})`}</h1>
-          {/* <h3>Overview:</h3> */}
           <p><b>Overview:</b> {overview}</p>
           <p><b>Genres:</b> {(genres.map(({ name }) => (
             <span>{` ${name} |`}</span>

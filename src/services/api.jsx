@@ -18,8 +18,8 @@ async function getPopularMovies() {
   }
 }
 
-// Запит по ключовому слову
-async function getMovieByKeyWord(id) {
+// Запит повної інформайії про фільм
+async function getFullInfoById(id) {
   try {
     const response = await axios.get(
       `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
@@ -61,5 +61,20 @@ async function getMovieReviews(id) {
   }
 }
 
+// Запит по ключовому слову
+async function getMovieByKeyWord(searchQuery) {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/search/movie?query="${searchQuery}"&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
+      // /search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
+    );
+    const data = await response.data;
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Error happen' + error);
+  }
+}
 
-export { getPopularMovies, getMovieByKeyWord, getMovieCast, getMovieReviews };
+
+export { getPopularMovies, getFullInfoById, getMovieCast, getMovieReviews, getMovieByKeyWord };
