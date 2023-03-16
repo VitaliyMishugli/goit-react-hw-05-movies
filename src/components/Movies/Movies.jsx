@@ -1,57 +1,49 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovieByKeyWord } from 'services/api';
-import SearchBox from '../SearchBox/SearchBox';
-// import { NavLink } from 'react-router-dom';
+import { NavItem } from './Movies.styled';
+
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('filter') ?? '';
 
   useEffect(() => {
     async function getMovies() {
-      const moviesByKeyWord = await getMovieByKeyWord('king');
+      const moviesByKeyWord = await getMovieByKeyWord(filter);
       setMovies(moviesByKeyWord.results);
-      console.log(movies);
     }
     getMovies();
   }, [filter])
 
   const changeFilter = (value) => {
-    setSearchParams(value !== '' ? { filter: value }: {});
+    setSearchParams(value !== '' ? { filter: value } : {});
   }
 
-  const visibleMovies = movies.filter(movie => movie.title.toLowerCase().includes(filter.toLowerCase()));
+  // const visibleMovies = movies.filter(movie => movie.title.toLowerCase().includes(filter.toLowerCase()));
   
-  if (movies.length === 0) {
+  if (movies === null) {
     return null;
   }
 
   return (
-    <>      
-      <SearchBox onChange={changeFilter} />
+    <>    
+      <form>
+        <input type="text" value={filter} onChange={(e)=>changeFilter(e.target.value)}/>
+        {/* <button type='submit' name='searchFilter'>Search</button> */}
+      </form>
       <div>
         <ul style={{ listStyle: 'none' }}>
-          {movies.length > 0 && (
-            visibleMovies.map(({ id, title }) => (
+          {movies.map(({ id, title }) => (
               <li key={id}>
-                {title}
+                <NavItem to={`/movies/${id}`} style={{margin: '10px'}}>{title}</NavItem>
               </li>
             ))
-          )}
-          {/* {movies.length > 0 && (
-            movies.map(({ id, title }) => (
-              <li key={id}>
-                {title}
-              </li>
-            ))
-          ) } */}
+          }
         </ul>
       </div>
     </>
-    
-
   )
 }
 
