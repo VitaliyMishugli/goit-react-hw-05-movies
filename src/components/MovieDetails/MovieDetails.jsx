@@ -33,7 +33,7 @@ const navAddDetails = [
 const MovieDetails = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/home";
-  // console.log(location)
+  console.log(location.state);
 
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);  
@@ -64,8 +64,8 @@ const MovieDetails = () => {
         <TextInfoContainer>
           <h1>{`${original_title} (${year})`}</h1>
           <p><b>Overview:</b> {overview}</p>
-          <p><b>Genres:</b> {(genres.map(({ name }) => (
-            <span>{` ${name} |`}</span>
+          <p><b>Genres:</b> {(genres.map(({ name, id }) => (
+            <span key={id}>{` ${name} |`}</span>
           )))}</p>
         </TextInfoContainer>
 
@@ -73,8 +73,7 @@ const MovieDetails = () => {
      
       <div style={{borderTop: '1px solid black', borderBottom: '1px solid black', padding:'5px'}}>
         <p>Additional information {movieId}</p>
-        {navAddDetails.map(({ href, text }) => (
-          
+        {navAddDetails.map(({ href, text }) => (          
           <NavItem to={href} state={{ from: backLinkHref }} key={href}>
             {text}
           </NavItem>

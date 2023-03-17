@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import {useParams} from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getMovieCast } from "services/api";
 import { CastContainer} from './Cast.styled';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w200/';
 
 const Cast = () => {
-  // const location = useLocation();
+  const location = useLocation();
   // const hrefBack = location.state?.from ?? "/home";
-  // console.log(location)
+  console.log(location)
 
 
   let { movieId } = useParams();
@@ -22,7 +22,7 @@ const Cast = () => {
     async function getCast() {
       const cast = await getMovieCast(movieId);
       setMovieCast(cast);
-      console.log(cast);
+      // console.log(cast);
       // console.log(popularMovies.total_results);
     }
     getCast();

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useLocation } from "react-router-dom";
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { getMovieByKeyWord } from 'services/api';
 import { NavItem } from './Movies.styled';
@@ -7,7 +6,7 @@ import { NavItem } from './Movies.styled';
 
 const Movies = () => {
   const location = useLocation();
-  // console.log(location)
+  console.log(location);
   const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('filter') ?? '';

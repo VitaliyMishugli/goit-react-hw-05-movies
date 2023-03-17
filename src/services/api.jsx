@@ -40,7 +40,7 @@ async function getMovieCast(id) {
       // https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
     );
     const data = await response.data;
-    console.log(data.cast);
+    // console.log(data.cast);
     return data.cast;
   } catch (error) {
     console.error('Error happen' + error);
