@@ -25,7 +25,6 @@ const Cast = () => {
 
   return (
     <>
-      <p>Cast component</p>
       <CastContainer>
         {movieCast.map(({ cast_id, character, name, profile_path }) => (
           <li key={cast_id}>
