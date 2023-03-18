@@ -15,12 +15,10 @@ export const NavItem = styled(NavLink)`
   text-decoration: none;
   color: blue;
   position: relative;
-
   &.active{
     background-color: tomato;
     color: white
   }
-
   :hover:not(.active),
   :focus-visible:not(.active){
     color: tomato

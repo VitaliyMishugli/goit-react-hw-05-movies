@@ -11,7 +11,6 @@ async function getPopularMovies() {
       `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
     );
     const data = await response.data;
-    // console.log(data);
     return data;
   } catch (error) {
     console.error('Error happen' + error);
@@ -25,7 +24,6 @@ async function getFullInfoById(id) {
       `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
     );
     const data = await response.data;
-    // console.log(data);
     return data;
   } catch (error) {
     console.error('Error happen' + error);
@@ -37,10 +35,8 @@ async function getMovieCast(id) {
   try {
     const response = await axios.get(
       `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
-      // https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
     );
     const data = await response.data;
-    // console.log(data.cast);
     return data.cast;
   } catch (error) {
     console.error('Error happen' + error);
@@ -54,7 +50,6 @@ async function getMovieReviews(id) {
       `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`
     );
     const data = await response.data;
-    console.log(data.results);
     return data.results;
   } catch (error) {
     console.error('Error happen' + error);
@@ -66,10 +61,8 @@ async function getMovieByKeyWord(searchQuery) {
   try {
     const response = await axios.get(
       `${BASE_URL}/search/movie?query="${searchQuery}"&api_key=${API_KEY}&language=en-US&page=1&include_adult=false`
-      // /search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
     );
     const data = await response.data;
-    // console.log(data);
     return data;
   } catch (error) {
     console.error('Error happen' + error);

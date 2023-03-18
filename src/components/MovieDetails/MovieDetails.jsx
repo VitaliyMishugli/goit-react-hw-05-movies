@@ -1,29 +1,10 @@
-import styled from 'styled-components';
-import { NavLink, Outlet, useParams, Link, useLocation } from "react-router-dom";
-// import { useParams, Link } from 'react-router-dom';
+import { NavItem, BackBtnLink, AdditionalInfoContainer } from "./MovieDetails.styled";
+import { Outlet, useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { getFullInfoById } from 'services/api';
 import { MovieInfoContainer, TextInfoContainer } from './MovieDetails.styled';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w200/';
-
-const NavItem = styled(NavLink)`
-  margin: 10px 10px;
-  padding: 3px;
-  border-radius: 4px;
-  text-decoration: none;
-  color: blue;
-
-  &.active{
-    background-color: tomato;
-    color: white
-  }
-
-  :hover:not(.active),
-  :focus-visible:not(.active){
-    color: tomato
-  }
-`;
 
 const navAddDetails = [
   { href: 'cast', text: 'Cast' },
@@ -33,7 +14,6 @@ const navAddDetails = [
 const MovieDetails = () => {
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/home";
-  console.log(location.state);
 
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);  
@@ -42,8 +22,6 @@ const MovieDetails = () => {
     async function getMovieInfo() {
       const movieById = await getFullInfoById(movieId);
       setMovie(movieById);
-      // console.log(movieById);
-      // console.log(popularMovies.total_results);
     }
     getMovieInfo();
   }, [movieId])
@@ -57,7 +35,7 @@ const MovieDetails = () => {
   
   return (
     <>
-      <button><Link to={backLinkHref} style={{textDecoration: 'none'}}>Go back</Link></button>
+      <button><BackBtnLink to={backLinkHref}>Go back</BackBtnLink></button>
       <MovieInfoContainer>
         <img src={`${BASE_IMG_URL}${poster_path}`} alt="" />
 
@@ -68,20 +46,18 @@ const MovieDetails = () => {
             <span key={id}>{` ${name} |`}</span>
           )))}</p>
         </TextInfoContainer>
-
       </MovieInfoContainer>
      
-      <div style={{borderTop: '1px solid black', borderBottom: '1px solid black', padding:'5px'}}>
-        <p>Additional information {movieId}</p>
+      <AdditionalInfoContainer>
+        <h3>Additional information about the movie</h3>
         {navAddDetails.map(({ href, text }) => (          
           <NavItem to={href} state={{ from: backLinkHref }} key={href}>
             {text}
           </NavItem>
         ))}      
-      </div>
+      </AdditionalInfoContainer>
       <Outlet />  
     </>
-    
   )
 }
 

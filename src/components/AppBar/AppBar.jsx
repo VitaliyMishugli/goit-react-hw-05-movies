@@ -12,7 +12,7 @@ const AppBar = () => {
       <HeaderBar >
         {navItems.map(({ href, text, icon: Icon }) => (
           <NavItem to={href} key={href}>
-            <Icon size="16px" style={{position: 'relative', top: '2px', marginRight: '2px'}} />
+            <Icon size="16px" style={{ position: 'relative', top: '2px', marginRight: '2px' }} />
             {text}
           </NavItem>
         ))}
